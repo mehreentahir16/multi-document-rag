@@ -1,0 +1,22 @@
+openai>=2.8.0
+pinecone-client>=6.0.0
+langchain>=1.0.0
+langchain-openai>=1.0.0
+langchain-pinecone>=0.2.0
+langchain-community>=0.4.0
+python-dotenv>=1.0.0
+
+# Document Processing
+pypdf2>=3.0.0
+python-docx>=1.2.0
+pandas>=2.2.0
+openpyxl>=3.1.0
+
+# Web Application
+streamlit>=1.40.0
+
+# Utilities
+tiktoken>=0.12.0
+tqdm>=4.67.0
+pydantic>=2.10.0
+typing-extensions>=4.15.0
