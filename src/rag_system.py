@@ -1,6 +1,9 @@
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
-from openai import OpenAI
+from typing import List, Dict, Any, Optional
+
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+
 from .config import Config
 from .embeddings import EmbeddingGenerator
 from .vector_store import PineconeVectorStore
@@ -50,26 +53,56 @@ class RAGResponse:
 
 
 class RAGSystem:
-    """Complete RAG system: Retrieval + Generation"""
+    """
+    Complete RAG system using LangChain framework
+    Implements: Retrieval + Generation using LangChain
+    """
     
     def __init__(self):
-        """Initialize RAG components"""
+        """Initialize RAG components with LangChain"""
         Config.validate()
         
-        # Initialize components
+        # Initialize retrieval components
         self.embedding_gen = EmbeddingGenerator()
         self.vector_store = PineconeVectorStore()
         
-        # Initialize LLM for generation
-        self.llm_client = OpenAI(
-            base_url=Config.GITHUB_API_BASE,
-            api_key=Config.GITHUB_TOKEN,
+        # Initialize LangChain LLM
+        self.llm = ChatOpenAI(
+            model=Config.MODEL_NAME,
+            temperature=Config.TEMPERATURE,
+            max_tokens=Config.MAX_TOKENS,
+            openai_api_key=Config.GITHUB_TOKEN,
+            openai_api_base=Config.GITHUB_API_BASE,
         )
         
-        self.model = Config.MODEL_NAME
-        self.temperature = Config.TEMPERATURE
+        # Create prompt template using LangChain
+        self._create_prompt_template()
         
-        print(" RAG system initialized")
+        print("RAG system initialized!")
+    
+    def _create_prompt_template(self):
+        """Create LangChain prompt template for RAG"""
+        
+        template = """You are a helpful AI assistant that answers questions based on provided document context.
+
+                    IMPORTANT RULES:
+                    1. Only use information from the provided context
+                    2. If the answer isn't in the context, clearly state that
+                    3. Always cite your sources using [Source X] format
+                    4. Be concise but comprehensive
+                    5. If multiple sources support your answer, mention all relevant ones
+
+                    For numerical data (like CPI values), provide the exact values found in the context and explain what they represent.
+
+                    Context from documents:
+                    {context}
+
+                    Question: {question}
+
+                    Please answer the question based on the context above. Cite sources using [Source X] format."""
+
+        # Create ChatPromptTemplate (LangChain)
+        self.prompt_template = ChatPromptTemplate.from_template(template)
     
     def retrieve(
         self, 
@@ -120,7 +153,7 @@ class RAGSystem:
         retrieved_chunks: List[RetrievedChunk]
     ) -> str:
         """
-        Generate answer using LLM with retrieved context
+        Generate answer using LangChain LLM with retrieved context
         
         Args:
             query: User question
@@ -137,38 +170,17 @@ class RAGSystem:
         
         context = "\n".join(context_parts)
         
-        # Create prompt
-        system_prompt = """You are a helpful AI assistant that answers questions based on provided document context.
-
-                        IMPORTANT RULES:
-                        1. Only use information from the provided context
-                        2. If the answer isn't in the context, clearly state that
-                        3. Always cite your sources using [Source X] format
-                        4. Be concise but comprehensive
-                        5. If multiple sources support your answer, mention all relevant ones
-                        """
-        
-        user_prompt = f"""Context from documents:
-
-{context}
-
-Question: {query}
-
-Please answer the question based on the context above. Cite sources using [Source X] format."""
-
         try:
-            # Call LLM
-            response = self.llm_client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                temperature=self.temperature,
-                max_tokens=Config.MAX_TOKENS
+            # Format prompt using LangChain template
+            messages = self.prompt_template.format_messages(
+                context=context,
+                question=query
             )
             
-            return response.choices[0].message.content
+            # Generate answer using LangChain
+            response = self.llm.invoke(messages)
+            
+            return response.content
             
         except Exception as e:
             return f"Error generating answer: {str(e)}"
@@ -180,7 +192,7 @@ Please answer the question based on the context above. Cite sources using [Sourc
         filter_dict: Optional[Dict[str, Any]] = None
     ) -> RAGResponse:
         """
-        Complete RAG query: Retrieve + Generate
+        Complete RAG query using LangChain framework: Retrieve + Generate
         
         Args:
             query: User question
@@ -190,10 +202,10 @@ Please answer the question based on the context above. Cite sources using [Sourc
         Returns:
             RAGResponse with answer and sources
         """
-        # Step 1: Retrieve relevant chunks
+        #Retrieve relevant chunks
         retrieved_chunks = self.retrieve(query, top_k, filter_dict)
         
-        # Step 2: Generate answer
+        #Generate answer using LangChain
         answer = self.generate_answer(query, retrieved_chunks)
         
         # Return complete response

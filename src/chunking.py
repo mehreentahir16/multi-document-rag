@@ -1,9 +1,10 @@
 import re
 import hashlib
-from .config import Config
 from dataclasses import dataclass
 from typing import List, Dict, Any
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+from .config import Config
 
 @dataclass
 class ProcessedChunk:
@@ -74,7 +75,7 @@ class DocumentChunker:
     
     def _chunk_pdf(self, doc_chunks: List[Dict[str, Any]], doc_name: str) -> List[ProcessedChunk]:
         """Chunk technical papers (PDFs) with page-aware splitting"""
-        print(f" Chunking PDF: {doc_name}")
+        print(f"Chunking PDF: {doc_name}")
         
         processed_chunks = []
         chunk_index = 0
@@ -107,12 +108,12 @@ class DocumentChunker:
                 ))
                 chunk_index += 1
         
-        print(f" Created {len(processed_chunks)} chunks")
+        print(f"Created {len(processed_chunks)} chunks")
         return processed_chunks
     
     def _chunk_docx(self, doc_chunks: List[Dict[str, Any]], doc_name: str) -> List[ProcessedChunk]:
         """Chunk legal documents (DOCX) with section-aware splitting"""
-        print(f"  📄 Chunking DOCX: {doc_name}")
+        print(f"Chunking DOCX: {doc_name}")
         
         processed_chunks = []
         chunk_index = 0
@@ -145,12 +146,12 @@ class DocumentChunker:
                 ))
                 chunk_index += 1
         
-        print(f"    ✅ Created {len(processed_chunks)} chunks")
+        print(f"Created {len(processed_chunks)} chunks")
         return processed_chunks
     
     def _chunk_excel(self, doc_chunks: List[Dict[str, Any]], doc_name: str) -> List[ProcessedChunk]:
         """Process tabular data (Excel) - minimal chunking"""
-        print(f"  📊 Processing Excel: {doc_name}")
+        print(f"Processing Excel: {doc_name}")
         
         processed_chunks = []
         
@@ -188,7 +189,7 @@ class DocumentChunker:
                     }
                 ))
         
-        print(f"    ✅ Created {len(processed_chunks)} chunks")
+        print(f"Created {len(processed_chunks)} chunks!")
         return processed_chunks
     
     def process_all_documents(
@@ -205,7 +206,7 @@ class DocumentChunker:
             List of ProcessedChunk objects ready for embedding
         """
         print("\n" + "="*60)
-        print("✂️  CHUNKING ALL DOCUMENTS")
+        print("CHUNKING ALL DOCUMENTS")
         print("="*60 + "\n")
         
         all_chunks = []
@@ -213,7 +214,7 @@ class DocumentChunker:
         # Process each document with appropriate strategy
         for doc_name, doc_chunks in loaded_docs.items():
             if not doc_chunks:
-                print(f"  ⚠️  Skipping {doc_name} (no content)")
+                print(f" Skipping {doc_name} (no content)")
                 continue
             
             # Determine document type and use appropriate chunker
@@ -226,13 +227,13 @@ class DocumentChunker:
             elif doc_type == 'excel':
                 chunks = self._chunk_excel(doc_chunks, doc_name)
             else:
-                print(f"  ⚠️  Unknown doc type for {doc_name}: {doc_type}")
+                print(f"Unknown doc type for {doc_name}: {doc_type}")
                 continue
             
             all_chunks.extend(chunks)
         
         print("\n" + "="*60)
-        print(f"✅ CHUNKING COMPLETE: {len(all_chunks)} total chunks ready")
+        print(f"CHUNKING COMPLETE: {len(all_chunks)} total chunks ready!")
         print("="*60 + "\n")
         
         return all_chunks

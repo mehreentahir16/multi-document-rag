@@ -1,9 +1,9 @@
-from openai import OpenAI
-from typing import List
 import time
 from tqdm import tqdm
-from .config import Config
+from typing import List
+from openai import OpenAI
 
+from .config import Config
 
 class EmbeddingGenerator:
     """Generate embeddings using GitHub Models (OpenAI-compatible)"""
@@ -20,9 +20,9 @@ class EmbeddingGenerator:
         self.model = Config.EMBEDDING_MODEL
         self.dimension = Config.PINECONE_DIMENSION
         
-        print(f"🤖 Initialized embedding generator")
-        print(f"   Model: {self.model}")
-        print(f"   Dimension: {self.dimension}")
+        print(f"Initialized embedding generator")
+        print(f"Model: {self.model}")
+        print(f"Dimension: {self.dimension}")
     
     def generate_embeddings(
         self, 
@@ -44,7 +44,7 @@ class EmbeddingGenerator:
         if not texts:
             return []
         
-        print(f"\n🔄 Generating embeddings for {len(texts)} texts...")
+        print(f"\n Generating embeddings for {len(texts)} texts...")
         
         all_embeddings = []
         
@@ -68,9 +68,9 @@ class EmbeddingGenerator:
                 batch_embeddings = [item.embedding for item in response.data]
                 all_embeddings.extend(batch_embeddings)
                 
-                # Rate limiting - be nice to free tier
+                # Rate limiting 
                 if batch_num < len(batches):  # Don't sleep after last batch
-                    time.sleep(0.5)  # Small delay between batches
+                    time.sleep(0.5)  # Small delay between batches to avoid hitting rate limits
                 
             except Exception as e:
                 print(f"\nError in batch {batch_num}: {e}")
@@ -96,5 +96,5 @@ class EmbeddingGenerator:
             )
             return response.data[0].embedding
         except Exception as e:
-            print(f" Error generating embedding: {e}")
+            print(f"Error generating embedding: {e}")
             raise

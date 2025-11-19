@@ -1,4 +1,5 @@
 import PyPDF2
+import traceback
 import pandas as pd
 from pathlib import Path
 from docx import Document
@@ -141,7 +142,7 @@ class ExcelLoader:
         handles inflation calculator with years in first column
         
         Returns:
-            List of dicts with 'text', 'sheet', 'row', 'decade', 'source', 'doc_type'
+            List of dicts with 'text', 'sheet', 'row', 'decade', 'source'
         """
         print(f"Loading Excel: {file_path.name}")
         
@@ -339,7 +340,6 @@ class ExcelLoader:
             
         except Exception as e:
             print(f"Error loading Excel: {e}")
-            import traceback
             traceback.print_exc()
             raise
 

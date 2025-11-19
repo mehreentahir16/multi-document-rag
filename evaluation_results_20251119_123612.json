@@ -1,0 +1,367 @@
+{
+  "timestamp": "2025-11-19T12:36:12.872399",
+  "aggregate_metrics": {
+    "total_tests": 8,
+    "successful_tests": 8,
+    "failed_tests": 0,
+    "avg_response_time": 4.513291150331497,
+    "avg_sources_retrieved": 4.0,
+    "avg_relevance": 0.65171249446875,
+    "correct_doc_rate": 0.625,
+    "citation_rate": 1.0
+  },
+  "individual_results": [
+    {
+      "test_id": 1,
+      "query": "What are the prohibited AI practices according to the EU AI Act?",
+      "category": "EU AI Act",
+      "expected_doc": "EU AI Act Doc.docx",
+      "description": "Tests retrieval of specific regulatory content and legal terminology",
+      "response_time": 2.6712253093719482,
+      "retrieval_metrics": {
+        "num_sources": 4,
+        "avg_relevance": 0.6209707865,
+        "max_relevance": 0.696473181,
+        "min_relevance": 0.586935103,
+        "correct_doc_retrieved": true
+      },
+      "answer_metrics": {
+        "answer_length": 341,
+        "has_citations": true,
+        "num_citations": 1,
+        "acknowledges_limitation": true
+      },
+      "answer": "The context provided does not specify the exact prohibited AI practices under the EU AI Act. It only mentions that prohibited AI systems are addressed in Chapter II, Article 5 of the Act but does not detail what these practices are. For further information, the original document or the AI Act Explorer would need to be consulted. [Source 2]",
+      "sources": [
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.696473181,
+          "citation": "EU AI Act Doc.docx (section 1.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.60213,
+          "citation": "EU AI Act Doc.docx (section 2.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.598344862,
+          "citation": "EU AI Act Doc.docx (section 11.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.586935103,
+          "citation": "EU AI Act Doc.docx (section 0.0)"
+        }
+      ]
+    },
+    {
+      "test_id": 2,
+      "query": "What are high-risk AI systems under the EU AI Act?",
+      "category": "EU AI Act",
+      "expected_doc": "EU AI Act Doc.docx",
+      "description": "Tests understanding of classification and categorization in legal text",
+      "response_time": 4.826919794082642,
+      "retrieval_metrics": {
+        "num_sources": 4,
+        "avg_relevance": 0.7412376555,
+        "max_relevance": 0.805675507,
+        "min_relevance": 0.677508354,
+        "correct_doc_retrieved": true
+      },
+      "answer_metrics": {
+        "answer_length": 1244,
+        "has_citations": true,
+        "num_citations": 4,
+        "acknowledges_limitation": true
+      },
+      "answer": "High-risk AI systems under the EU AI Act are defined as follows:\n\n1. **AI systems used as a safety component or a product covered by EU laws in Annex I** and required to undergo a third-party conformity assessment under those Annex I laws [Source 2].\n\n2. **AI systems under Annex III use cases**, except in specific scenarios where the system:\n   - Performs a narrow procedural task;\n   - Improves the result of a previously completed human activity;\n   - Detects decision-making patterns or deviations from prior decision-making patterns but does not replace or influence the previously completed human assessment without proper human review;\n   - Performs a preparatory task for an assessment relevant to Annex III use cases [Source 3].\n\n3. **AI systems that profile individuals**, i.e., automated processing of personal data to assess various aspects of a person’s life, such as work performance, economic situation, health, preferences, interests, reliability, behavior, location, or movement. These are always considered high-risk [Source 3].\n\nProviders of AI systems falling under Annex III but believing their system is not high-risk must document such an assessment before placing it on the market or putting it into service [Source 3].",
+      "sources": [
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.805675507,
+          "citation": "EU AI Act Doc.docx (section 1.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.779537261,
+          "citation": "EU AI Act Doc.docx (section 5.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.7022295,
+          "citation": "EU AI Act Doc.docx (section 6.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.677508354,
+          "citation": "EU AI Act Doc.docx (section 7.0)"
+        }
+      ]
+    },
+    {
+      "test_id": 3,
+      "query": "Explain the self-attention mechanism in transformers",
+      "category": "Transformers",
+      "expected_doc": "Attention_is_all_you_need.pdf",
+      "description": "Tests retrieval of technical concepts and ability to explain complex mechanisms",
+      "response_time": 3.750800609588623,
+      "retrieval_metrics": {
+        "num_sources": 4,
+        "avg_relevance": 0.62247323975,
+        "max_relevance": 0.651721954,
+        "min_relevance": 0.572916031,
+        "correct_doc_retrieved": true
+      },
+      "answer_metrics": {
+        "answer_length": 1106,
+        "has_citations": true,
+        "num_citations": 2,
+        "acknowledges_limitation": false
+      },
+      "answer": "The self-attention mechanism in Transformers is an attention mechanism that relates different positions within a single sequence to compute a representation of that sequence. It enables the model to capture dependencies between elements in the sequence without relying on recurrence or convolution. \n\nIn self-attention, the keys, values, and queries all originate from the same sequence, allowing each position in the sequence to attend to all other positions. This mechanism is used in both the encoder and decoder of the Transformer architecture. In the encoder, self-attention layers allow each position to attend to all positions in the previous layer of the encoder. In the decoder, self-attention layers are modified to prevent positions from attending to subsequent positions, ensuring that predictions for a position depend only on known outputs at earlier positions [Source 1, Source 2, Source 4].\n\nSelf-attention has been successfully applied to tasks such as reading comprehension, abstractive summarization, textual entailment, and learning task-independent sentence representations [Source 1].",
+      "sources": [
+        {
+          "source": "Attention_is_all_you_need.pdf",
+          "score": 0.651721954,
+          "citation": "Attention_is_all_you_need.pdf (page 2.0)"
+        },
+        {
+          "source": "Attention_is_all_you_need.pdf",
+          "score": 0.642967224,
+          "citation": "Attention_is_all_you_need.pdf (page 3.0)"
+        },
+        {
+          "source": "Attention_is_all_you_need.pdf",
+          "score": 0.62228775,
+          "citation": "Attention_is_all_you_need.pdf (page 2.0)"
+        },
+        {
+          "source": "Attention_is_all_you_need.pdf",
+          "score": 0.572916031,
+          "citation": "Attention_is_all_you_need.pdf (page 5.0)"
+        }
+      ]
+    },
+    {
+      "test_id": 4,
+      "query": "How do multi-head attention layers work in the transformer architecture?",
+      "category": "Transformers",
+      "expected_doc": "Attention_is_all_you_need.pdf",
+      "description": "Tests the ability to understand deep technical details and architectural aspects",
+      "response_time": 10.434325695037842,
+      "retrieval_metrics": {
+        "num_sources": 4,
+        "avg_relevance": 0.67675303775,
+        "max_relevance": 0.770174,
+        "min_relevance": 0.581586838,
+        "correct_doc_retrieved": true
+      },
+      "answer_metrics": {
+        "answer_length": 1803,
+        "has_citations": true,
+        "num_citations": 3,
+        "acknowledges_limitation": false
+      },
+      "answer": "Multi-head attention layers in the Transformer architecture work by allowing the model to attend to information from different representation subspaces at different positions simultaneously. Each attention head operates independently, and their outputs are concatenated and projected to produce the final values. This mechanism enables the model to capture diverse aspects of the input data without the averaging limitations of single-head attention.\n\nThe formula for multi-head attention is:\n\n**MultiHead(Q, K, V) = Concat(head₁, ..., headₕ)Wₒ**,  \nwhere **headᵢ = Attention(QWQᵢ, KWKᵢ, VWVᵢ)**.\n\nHere:\n- **Q**, **K**, and **V** represent the queries, keys, and values, respectively.\n- **WQᵢ**, **WKᵢ**, **WVᵢ**, and **Wₒ** are parameter matrices for projections.\n- The dimensions of each head are reduced, with **dₖ = dᵥ = dₘₒₑₗ / h = 64**, where **dₘₒₑₗ = 512** and **h = 8** (number of attention heads).\n\nThis design ensures that the computational cost remains similar to single-head attention while improving the model's ability to learn dependencies across positions. Multi-head attention is applied in three ways in the Transformer:\n1. **Encoder-decoder attention**: Queries come from the decoder, while keys and values come from the encoder output, allowing the decoder to attend to all positions in the input sequence.\n2. **Self-attention in the encoder**: Each position in the encoder attends to all positions in the previous encoder layer.\n3. **Self-attention in the decoder**: Each position in the decoder attends to all positions up to and including itself, with masking to prevent attending to future positions.\n\nThis mechanism is central to the Transformer’s ability to model global dependencies efficiently without relying on recurrence or convolution. [Source 1], [Source 2], [Source 3]",
+      "sources": [
+        {
+          "source": "Attention_is_all_you_need.pdf",
+          "score": 0.770174,
+          "citation": "Attention_is_all_you_need.pdf (page 5.0)"
+        },
+        {
+          "source": "Attention_is_all_you_need.pdf",
+          "score": 0.685137749,
+          "citation": "Attention_is_all_you_need.pdf (page 3.0)"
+        },
+        {
+          "source": "Attention_is_all_you_need.pdf",
+          "score": 0.670113564,
+          "citation": "Attention_is_all_you_need.pdf (page 2.0)"
+        },
+        {
+          "source": "Attention_is_all_you_need.pdf",
+          "score": 0.581586838,
+          "citation": "Attention_is_all_you_need.pdf (page 2.0)"
+        }
+      ]
+    },
+    {
+      "test_id": 5,
+      "query": "What is the key idea presented in DeepSeek-R1?",
+      "category": "DeepSeek",
+      "expected_doc": "Deepseek-r1.pdf",
+      "description": "Tests the ability to identify key contributions in research papers",
+      "response_time": 4.07923436164856,
+      "retrieval_metrics": {
+        "num_sources": 4,
+        "avg_relevance": 0.67066381875,
+        "max_relevance": 0.695316255,
+        "min_relevance": 0.657726288,
+        "correct_doc_retrieved": true
+      },
+      "answer_metrics": {
+        "answer_length": 837,
+        "has_citations": true,
+        "num_citations": 3,
+        "acknowledges_limitation": false
+      },
+      "answer": "The key idea presented in DeepSeek-R1 is the use of large-scale reinforcement learning (RL) to significantly enhance reasoning capabilities, even without relying heavily on supervised fine-tuning (SFT) as a starting point. DeepSeek-R1 applies RL starting from a checkpoint fine-tuned with thousands of long Chain-of-Thought (CoT) examples, which improves its performance across diverse tasks, including creative writing, general question answering, editing, summarization, and long-context understanding. This approach also allows for distilling reasoning capabilities into smaller dense models. Additionally, DeepSeek-R1 demonstrates strong performance on benchmarks like AlpacaEval 2.0, ArenaHard, and FRAMES, showcasing its strengths in reasoning, instruction-following, and document analysis tasks [Source 1], [Source 2], [Source 3].",
+      "sources": [
+        {
+          "source": "Deepseek-r1.pdf",
+          "score": 0.695316255,
+          "citation": "Deepseek-r1.pdf (page 16.0)"
+        },
+        {
+          "source": "Deepseek-r1.pdf",
+          "score": 0.670928955,
+          "citation": "Deepseek-r1.pdf (page 5.0)"
+        },
+        {
+          "source": "Deepseek-r1.pdf",
+          "score": 0.658683777,
+          "citation": "Deepseek-r1.pdf (page 13.0)"
+        },
+        {
+          "source": "Deepseek-r1.pdf",
+          "score": 0.657726288,
+          "citation": "Deepseek-r1.pdf (page 6.0)"
+        }
+      ]
+    },
+    {
+      "test_id": 6,
+      "query": "What was the average inflation rate in 1950?",
+      "category": "Inflation Data",
+      "expected_doc": "Inflation_Calculator.xlsx",
+      "description": "Tests retrieval of specific numerical data from tabular sources",
+      "response_time": 3.4470367431640625,
+      "retrieval_metrics": {
+        "num_sources": 4,
+        "avg_relevance": 0.70676831925,
+        "max_relevance": 0.744228423,
+        "min_relevance": 0.667199135,
+        "correct_doc_retrieved": false
+      },
+      "answer_metrics": {
+        "answer_length": 476,
+        "has_citations": true,
+        "num_citations": 1,
+        "acknowledges_limitation": true
+      },
+      "answer": "The context provided does not include the average inflation rate for 1950. However, it does provide the average annual CPI for 1950, which was **24.066666666666666** [Source 1, Source 2]. Inflation rates are typically calculated based on the percentage change in CPI from one year to the next, but the necessary comparison data (e.g., CPI for 1949) is not provided in the context. Therefore, the average inflation rate for 1950 cannot be determined from the given information.",
+      "sources": [
+        {
+          "source": "Inflation Calculator.xlsx",
+          "score": 0.744228423,
+          "citation": "Inflation Calculator.xlsx (sheet: INFLATION.CALCULATOR, row: decade_1950)"
+        },
+        {
+          "source": "Inflation Calculator.xlsx",
+          "score": 0.743080199,
+          "citation": "Inflation Calculator.xlsx (sheet: INFLATION.CALCULATOR, row: 51.0)"
+        },
+        {
+          "source": "Inflation Calculator.xlsx",
+          "score": 0.67256552,
+          "citation": "Inflation Calculator.xlsx (sheet: INFLATION.CALCULATOR, row: 56.0)"
+        },
+        {
+          "source": "Inflation Calculator.xlsx",
+          "score": 0.667199135,
+          "citation": "Inflation Calculator.xlsx (sheet: INFLATION.CALCULATOR, row: 52.0)"
+        }
+      ]
+    },
+    {
+      "test_id": 7,
+      "query": "Calculate the inflation adjusted value of $25 in 2020 as compared to 2015",
+      "category": "Inflation Data",
+      "expected_doc": "Inflation_Calculator.xlsx",
+      "description": "Tests the ability to retrieve multi-year data from Excel data and perform calculation on it",
+      "response_time": 2.821269989013672,
+      "retrieval_metrics": {
+        "num_sources": 4,
+        "avg_relevance": 0.5711791755,
+        "max_relevance": 0.586633742,
+        "min_relevance": 0.548955,
+        "correct_doc_retrieved": false
+      },
+      "answer_metrics": {
+        "answer_length": 708,
+        "has_citations": true,
+        "num_citations": 3,
+        "acknowledges_limitation": false
+      },
+      "answer": "To calculate the inflation-adjusted value of $25 in 2020 compared to 2015, we use the CPI ratio between the two years:\n\n1. **Average annual CPI for 2020**: 258.8111666666667 [Source 3]  \n2. **Average annual CPI for 2015**: 237.01700000000002 [Source 2]  \n\nThe formula for inflation adjustment is:  \n\\[\n\\text{Adjusted Value} = \\text{Original Value} \\times \\frac{\\text{CPI in Target Year}}{\\text{CPI in Base Year}}\n\\]\n\nSubstituting the values:  \n\\[\n\\text{Adjusted Value} = 25 \\times \\frac{258.8111666666667}{237.01700000000002}\n\\]\n\n\\[\n\\text{Adjusted Value} = 25 \\times 1.0918 \\approx 27.30\n\\]\n\nThus, the inflation-adjusted value of $25 in 2020 compared to 2015 is approximately **$27.30**. [Source 2, Source 3]",
+      "sources": [
+        {
+          "source": "Inflation Calculator.xlsx",
+          "score": 0.586633742,
+          "citation": "Inflation Calculator.xlsx (sheet: INFLATION.CALCULATOR, row: 26.0)"
+        },
+        {
+          "source": "Inflation Calculator.xlsx",
+          "score": 0.579767227,
+          "citation": "Inflation Calculator.xlsx (sheet: INFLATION.CALCULATOR, row: 116.0)"
+        },
+        {
+          "source": "Inflation Calculator.xlsx",
+          "score": 0.569360733,
+          "citation": "Inflation Calculator.xlsx (sheet: INFLATION.CALCULATOR, row: 121.0)"
+        },
+        {
+          "source": "Inflation Calculator.xlsx",
+          "score": 0.548955,
+          "citation": "Inflation Calculator.xlsx (sheet: INFLATION.CALCULATOR, row: 56.0)"
+        }
+      ]
+    },
+    {
+      "test_id": 8,
+      "query": "How might transformer-based AI systems be regulated under the EU AI Act?",
+      "category": "Cross-document",
+      "expected_doc": "Multiple",
+      "description": "Tests the ability to synthesize information across multiple documents",
+      "response_time": 4.075516700744629,
+      "retrieval_metrics": {
+        "num_sources": 4,
+        "avg_relevance": 0.60365392275,
+        "max_relevance": 0.696208954,
+        "min_relevance": 0.562494278,
+        "correct_doc_retrieved": false
+      },
+      "answer_metrics": {
+        "answer_length": 1701,
+        "has_citations": true,
+        "num_citations": 5,
+        "acknowledges_limitation": true
+      },
+      "answer": "The provided context does not explicitly mention transformer-based AI systems or their specific regulation under the EU AI Act. However, based on the general framework described:\n\n1. **Risk Classification**: Transformer-based AI systems would likely be classified according to their risk level:\n   - If they are used in applications deemed **high-risk** (e.g., safety-critical systems or those covered by Annex I laws requiring third-party conformity assessments), they would be subject to stringent regulations [Source 1; Source 2].\n   - If they are used in applications with **limited risk** (e.g., chatbots or deepfakes), they would have lighter transparency obligations, such as ensuring end-users are aware they are interacting with AI [Source 1].\n   - If they are considered **minimal risk** (e.g., generative AI for entertainment purposes like video games), they may remain unregulated [Source 1].\n\n2. **Obligations**: The majority of obligations for high-risk AI systems fall on providers (developers), including those outside the EU if their systems' output is used within the EU. Users (deployers) of high-risk systems also have some obligations, though less stringent than those for providers [Source 1].\n\n3. **Deadlines**: If transformer-based systems are classified as high-risk under Annex III or Annex I, they would need to comply within 24 months or 36 months, respectively, after the AI Act's entry into force [Source 3].\n\nIn summary, transformer-based AI systems would be regulated based on their risk classification and use case, with high-risk systems facing the most stringent requirements. For further details specific to transformer-based AI, additional context would be needed.",
+      "sources": [
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.696208954,
+          "citation": "EU AI Act Doc.docx (section 1.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.579240859,
+          "citation": "EU AI Act Doc.docx (section 5.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.5766716,
+          "citation": "EU AI Act Doc.docx (section 11.0)"
+        },
+        {
+          "source": "EU AI Act Doc.docx",
+          "score": 0.562494278,
+          "citation": "EU AI Act Doc.docx (section 0.0)"
+        }
+      ]
+    }
+  ]
+}

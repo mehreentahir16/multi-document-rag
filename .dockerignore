@@ -1,0 +1,45 @@
+#python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Documentation
+README.md
+*.md
+docs/
+
+# Tests
+tests/
+*.pytest_cache
+test_*.py
+
+#no need to inclued the processed chunks or evaluation results - too large)
+processed_chunks.json
+evaluation_results_*.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Environment
+.env
+.env.local
+*.env

@@ -1,5 +1,6 @@
 import json
 from typing import List, Dict, Any
+
 from .document_loader import DocumentLoader
 from .chunking import DocumentChunker, ProcessedChunk
 
@@ -17,13 +18,13 @@ class DocumentPipeline:
         Returns:
             List of ProcessedChunk objects ready for embedding
         """
-        # Step 1: Load all documents
+        #Load all documents
         loaded_docs = self.loader.load_all_documents()
         
-        # Step 2: Chunk documents
+        #Chunk documents
         chunks = self.chunker.process_all_documents(loaded_docs)
         
-        # Step 3: Show statistics
+        #Show statistics
         stats = self.chunker.get_chunking_stats(chunks)
         self._print_stats(stats)
         
@@ -40,9 +41,9 @@ class DocumentPipeline:
         print("-"*60)
         
         for doc_name, doc_stats in stats['by_document'].items():
-            print(f"  {doc_name} ({doc_stats['doc_type']}):")
-            print(f"    Chunks: {doc_stats['count']}")
-            print(f"    Avg Size: {doc_stats['avg_size']:.0f} chars")
+            print(f"{doc_name} ({doc_stats['doc_type']}):")
+            print(f"Chunks: {doc_stats['count']}")
+            print(f"Avg Size: {doc_stats['avg_size']:.0f} chars")
         
         print("="*60)
     

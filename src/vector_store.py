@@ -1,10 +1,10 @@
-from pinecone import Pinecone, ServerlessSpec
-from typing import List, Dict, Any, Optional
 import time
 from tqdm import tqdm
+from typing import List, Dict, Any, Optional
+from pinecone import Pinecone, ServerlessSpec
+
 from .config import Config
 from .chunking import ProcessedChunk
-
 
 class PineconeVectorStore:
     """Manage Pinecone vector store operations"""
@@ -28,10 +28,10 @@ class PineconeVectorStore:
             self.index = self.pc.Index(self.index_name)
             
             # Show current stats
-            stats = self.index.describe_index_stats()
-            print(f" Current vectors: {stats.total_vector_count}")
+            stats = self.get_stats()
+            print(f"Current vectors: {stats['total_vectors']}")
         else:
-            print(f" Creating index: {self.index_name}")
+            print(f"Creating index: {self.index_name}")
             
             self.pc.create_index(
                 name=self.index_name,
@@ -45,7 +45,7 @@ class PineconeVectorStore:
                 time.sleep(1)
             
             self.index = self.pc.Index(self.index_name)
-            print(" Index created successfully!")
+            print("Index created successfully!")
     
     def upload_chunks(
         self,
@@ -71,9 +71,9 @@ class PineconeVectorStore:
                 f"Chunks ({len(chunks)}) and embeddings ({len(embeddings)}) count mismatch!"
             )
         
-        # reset index contents before uploading (in case of a re-run)
+        # reset index contents before uploading (we want to avoid duplication in case of a re-run)
         print(f"\n Resetting Pinecone index before upload...")
-        self.index.delete(delete_all=True)
+        self.clear_index()
         
         print(f"\n Uploading {len(chunks)} vectors to Pinecone...")
         
@@ -115,18 +115,18 @@ class PineconeVectorStore:
                 print(f"\n Error uploading batch: {e}")
                 raise
         
-        print(f" Successfully uploaded {uploaded} vectors")
+        print(f"Successfully uploaded {uploaded} vectors")
         
         # Wait a moment for indexing
         time.sleep(2)
         
         # Verify upload
-        stats = self.index.describe_index_stats()
-        print(f"📊 Total vectors in index: {stats.total_vector_count}")
+        stats = self.get_stats()
+        print(f"Total vectors in index: {stats['total_vectors']}")
         
         return {
             "uploaded": uploaded,
-            "total_in_index": stats.total_vector_count,
+            "total_in_index": stats['total_vectors'],
             "index_name": self.index_name
         }
     
@@ -151,7 +151,7 @@ class PineconeVectorStore:
             return results.matches
             
         except Exception as e:
-            print(f" Query error: {e}")
+            print(f"Query error: {e}")
             return []
     
     def get_stats(self) -> Dict[str, Any]:
@@ -167,8 +167,8 @@ class PineconeVectorStore:
         """Clear all vectors (use with caution!)"""
         try:
             self.index.delete(delete_all=True)
-            print(f" Cleared all vectors from {self.index_name}")
+            print(f"Cleared all vectors from {self.index_name}")
             return True
         except Exception as e:
-            print(f" Error clearing index: {e}")
+            print(f"Error clearing index: {e}")
             return False

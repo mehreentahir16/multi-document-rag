@@ -1,8 +1,9 @@
-import streamlit as st
-from src.rag_system import RAGSystem, RAGResponse
-from src.config import Config
 import time
+import streamlit as st
 from datetime import datetime
+
+from src.config import Config
+from src.rag_system import RAGSystem
 
 # Page configuration
 st.set_page_config(
@@ -220,7 +221,7 @@ Index: {Config.PINECONE_INDEX_NAME}
             help="Limit search to specific document"
         )
         
-        # Example queries - FIXED: Individual clickable buttons
+        # Example queries - Individual clickable buttons
         st.subheader("💡 Example Questions")
         
         example_questions = [
@@ -251,10 +252,10 @@ Index: {Config.PINECONE_INDEX_NAME}
     # Main content area
     st.markdown("---")
     
-    # Chat input at the top (always visible)
+    # Chat input at the top 
     st.subheader("💬 Ask a Question")
     
-    # Input form with unique key that changes on submit
+    # Input form with unique key that changes on submit to avoid errors
     with st.form(key=f"query_form_{st.session_state.input_key}", clear_on_submit=True):
         query = st.text_input(
             "Your question:",
@@ -299,8 +300,8 @@ Index: {Config.PINECONE_INDEX_NAME}
         st.markdown("""
         This system can answer questions about:
         - 📄 **EU AI Act** - Legal regulations for AI systems
-        - 📄 **Attention is All You Need** - Transformer architecture paper
-        - 📄 **DeepSeek-R1** - Latest AI research
+        - 📄 **Attention is All You Need** - Technical paper explaining Transformer architecture 
+        - 📄 **DeepSeek-R1** - Latest AI research paper
         - 📊 **Inflation Calculator** - Historical CPI data (1913-2022)
         
         **Try asking a question above, or click an example question in the sidebar!** 👈

@@ -11,6 +11,7 @@ class Config:
     # Directory Structure 
     BASE_DIR = Path(__file__).parent.parent
     DATA_DIR = BASE_DIR / "data"
+    SRC_DIR = BASE_DIR / "src"
     
     # API Keys 
     GITHUB_TOKEN: str = os.getenv("GITHUB_TOKEN", "")
@@ -18,13 +19,13 @@ class Config:
     
     # GitHub Models Configuration 
     GITHUB_API_BASE: str = "https://models.inference.ai.azure.com"
-    MODEL_NAME: str = os.getenv("MODEL_NAME", "gpt-4o")
+    MODEL_NAME: str = os.getenv("MODEL_NAME", "gpt-4o").strip()
     EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
     TEMPERATURE: float = float(os.getenv("TEMPERATURE", "0.1"))
-    MAX_TOKENS: int = int(os.getenv("MAX_TOKENS", "1000"))
+    MAX_TOKENS: int = int(os.getenv("MAX_TOKENS", "1024"))
     
     # Pinecone Configuration
-    PINECONE_INDEX_NAME: str = os.getenv("PINECONE_INDEX_NAME", "rag-challenge")
+    PINECONE_INDEX_NAME: str = os.getenv("PINECONE_INDEX_NAME", "multi-document-rag")
     PINECONE_DIMENSION: int = 1536  # text-embedding-3-small
     PINECONE_METRIC: str = "cosine"
     
@@ -88,7 +89,7 @@ class Config:
         )
         
         return f"""
-RAG Challenge Configuration
+Multi Document RAG Configuration
 {'='*50}
 Model: {cls.MODEL_NAME}
 Embedding: {cls.EMBEDDING_MODEL}
