@@ -32,7 +32,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ toLower(github.repository) }}
+          images: ghcr.io/${{ github.repository }}
           tags: |
             type=sha
             type=raw,value=latest
@@ -52,4 +52,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: ghcr.io/${{ toLower(github.repository) }}:latest
+          images: ghcr.io/${{ github.repository }}:latest
